@@ -14,16 +14,16 @@ const Exchanges = () => {
 
   useEffect(() => {
     const fetchExchanges = async () => {
-try {
-  
-      const { data } = await axios.get(`${server}/exchanges`);
+      try {
 
-      setExchanges(data);
-  setLoading(false);
-} catch (error) {
-  setError(true);
-  setLoading(false);
-}
+        const { data } = await axios.get(`${server}/exchanges`);
+
+        setExchanges(data);
+        setLoading(false);
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
     }
     fetchExchanges();
   }, [])
@@ -35,7 +35,7 @@ try {
       {
         loading ? <Loader /> :
 
-          <HStack wrap={'wrap'}>
+          <HStack wrap={'wrap'} justifyContent={'space-evenly'}>
             {
               exchanges.map((i) => (
                 <ExchangeCard name={i.name} img={i.image} rank={i.trust_score_rank} url={i.url} />
